@@ -1,11 +1,9 @@
 package tuan.kul.dao;
 
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import tuan.kul.model.User;
 
-@Repository
-public interface UserDao extends CrudRepository<User, Long> {
-    User findByUsername(String username);
+public interface UserDao extends JpaRepository<User, Long> {
+    
 }

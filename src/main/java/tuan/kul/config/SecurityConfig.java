@@ -37,6 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(encoder());
+        System.out.println( " 12321321.. "+auth.userDetailsService(userDetailsService).passwordEncoder(encoder()));
     }
 
     @Override
