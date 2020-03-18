@@ -2,11 +2,11 @@ package tuan.kul.service;
 
 import java.util.List;
 
-import tuan.kul.model.User;
+import tuan.kul.entity.UserEntity;
 
 public interface UserService {
 
-    User save(User user);
-    List<User> findAll();
-    void delete(long id);
+    UserEntity save(UserEntity user);
+    List<UserEntity> findAll();
+    void delete(String userName);
 }

@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 @EnableAutoConfiguration
 @ComponentScan(value = "tuan.kul")
-@EnableJpaRepositories(value = "tuan.kul.dao")
+@EnableJpaRepositories(value = "tuan.kul.repository")
 @EntityScan(basePackages = "tuan.kul")
 @EnableTransactionManagement
 public class BanHangOnlineApplication {
