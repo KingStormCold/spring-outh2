@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 //        if (user.isPresent()) {
 //            throw new UsernameNotFoundException("Invalid username or password.");
 //        }
-        return new org.springframework.security.core.userdetails.User("tuankul", "123456",
+        return new org.springframework.security.core.userdetails.User("tuankul", "$2y$12$Cxy9kaJQjriVk9tWkP/F5eDJVA/Gyl2PBYHQZenO6XAo91skvX5Yu",
                 getAuthority());
     }
 

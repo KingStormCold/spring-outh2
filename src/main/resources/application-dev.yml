@@ -1,24 +1,24 @@
-server:
-    port: 8080
-
-spring:
-  datasource:    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/postgres
-    username: postgres
-    password: 123456
-    # connection pool(default)
-  jpa:
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
-    show-sql: true
-    generate-ddl: false
-    hibernate:
-#      ddl-auto: create
-      ddl-auto: update
-      dialect: org.hibernate.dialect.PostgreSQL94Dialect
-      default_schema: public
-    properties:
-      hibernate.cache.use_second_level_cache: false
-      hibernate.cache.use_query_cache: false
-      hibernate.generate_statistics: true
-#      hibernate.hbm2ddl.auto: create
-      hibernate.hbm2ddl.auto: update
+#server:
+#    port: 8080
+#
+#spring:
+#  datasource:#    driver-class-name: org.postgresql.Driver
+#    url: jdbc:postgresql://localhost:5432/postgres
+#    username: postgres
+#    password: 123456
+#    # connection pool(default)
+#  jpa:
+#    database-platform: org.hibernate.dialect.PostgreSQLDialect
+#    show-sql: true
+#    generate-ddl: false
+#    hibernate:
+##      ddl-auto: create
+#      ddl-auto: update
+#      dialect: org.hibernate.dialect.PostgreSQL94Dialect
+#      default_schema: public
+#    properties:
+#      hibernate.cache.use_second_level_cache: false
+#      hibernate.cache.use_query_cache: false
+#      hibernate.generate_statistics: true
+##      hibernate.hbm2ddl.auto: create
+#      hibernate.hbm2ddl.auto: update

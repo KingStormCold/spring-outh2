@@ -36,7 +36,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         configurer.inMemory()
                 .withClient(CLIEN_ID)
                 .secret(CLIENT_SECRET)
-                .authorizedGrantTypes(GRANT_TYPE, AUTHORIZATION_CODE, REFRESH_TOKEN, IMPLICIT)
+                .authorizedGrantTypes(GRANT_TYPE, REFRESH_TOKEN)
                 .scopes(SCOPE_READ, SCOPE_WRITE, TRUST)
                 .accessTokenValiditySeconds(ACCESS_TOKEN_VALIDITY_SECONDS)
                 .refreshTokenValiditySeconds(FREFRESH_TOKEN_VALIDITY_SECONDS);
