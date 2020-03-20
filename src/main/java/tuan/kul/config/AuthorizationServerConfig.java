@@ -8,11 +8,13 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 
 @Configuration
@@ -48,11 +50,13 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Resource(name = "userService")
 	private UserDetailsService userDetailsService;
 
+	//7
 	@Override
 	public void configure(ClientDetailsServiceConfigurer client) throws Exception {
-		client.jdbc(dataSource).inMemory().withClient("client_api").secret(passwordEncoder.encode("123456"))
-				.accessTokenValiditySeconds(ACCESS_TOKEN_VALIDITY_SECONDS).scopes(SCOPE_READ, SCOPE_WRITE, TRUST)
-				.authorizedGrantTypes(GRANT_TYPE, REFRESH_TOKEN).resourceIds("resource");
+		client.jdbc(dataSource);
+//		client.jdbc(dataSource).inMemory().withClient("client_api").secret(passwordEncoder.encode("123456"))
+//				.accessTokenValiditySeconds(ACCESS_TOKEN_VALIDITY_SECONDS).scopes(SCOPE_READ, SCOPE_WRITE, TRUST)
+//				.authorizedGrantTypes(GRANT_TYPE, REFRESH_TOKEN).resourceIds("resource");
 //        configurer.inMemory()
 //                .withClient(CLIEN_ID)
 //                .secret(passwordEncoder.encode(CLIENT_SECRET))
@@ -62,9 +66,15 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 //                .refreshTokenValiditySeconds(FREFRESH_TOKEN_VALIDITY_SECONDS);
 	}
 
+	//6
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer configurer) throws Exception {
-		configurer.authenticationManager(authenticationManager).approvalStoreDisabled()
-				.userDetailsService(userDetailsService);
+		configurer.tokenStore(tokenStore).authenticationManager(authenticationManager);
+	}
+	
+	//oauth check token
+	@Override
+	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
+		security.checkTokenAccess("permitAll()");
 	}
 }

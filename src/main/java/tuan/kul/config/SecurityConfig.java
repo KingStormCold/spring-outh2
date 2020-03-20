@@ -1,8 +1,10 @@
 package tuan.kul.config;
 
 import javax.annotation.Resource;
+import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -28,6 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Resource(name = "userService")
     private UserDetailsService userDetailsService;
     
+    //5
     @Override
     @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {
@@ -35,11 +38,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
     
     @Autowired
+	@Qualifier("dataSource")
+	DataSource dataSource;
+    
+    //1
     public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(encoder());
         System.out.println( " 12321321.. "+auth.userDetailsService(userDetailsService).passwordEncoder(encoder()));
     }
 
+    //10
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -49,16 +57,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api-docs/**").permitAll();
     }
 
+    //4
     @Bean
     public TokenStore tokenStore() {
-        return new InMemoryTokenStore();
+    	return new InMemoryTokenStore();
     }
 
+    //2
     @Bean
     public BCryptPasswordEncoder encoder(){
         return new BCryptPasswordEncoder();
     }
 
+    //3
     @Bean
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
