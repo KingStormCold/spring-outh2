@@ -17,6 +17,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
+import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
@@ -60,7 +61,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     //4
     @Bean
     public TokenStore tokenStore() {
-    	return new InMemoryTokenStore();
+    	return new JdbcTokenStore(dataSource);
     }
 
     //2

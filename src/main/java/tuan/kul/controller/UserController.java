@@ -25,6 +25,18 @@ public class UserController {
     public List listUser(){
         return userService.findAll();
     }
+    
+    @PreAuthorize("#oauth2.hasScope('read')")
+    @GetMapping(value = "/user1")
+    public List listUser1(){
+        return userService.findAll();
+    }
+    
+    @PreAuthorize("#oauth2.hasScope('read1')")
+    @GetMapping(value = "/user2")
+    public List listUser2(){
+        return userService.findAll();
+    }
 
     @PreAuthorize("#oauth2.hasScope('read')")
     @PostMapping(value = "/users/user")
